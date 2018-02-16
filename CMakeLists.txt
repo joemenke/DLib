@@ -62,8 +62,14 @@ if(BUILD_DVision)
     src/DVision/PixelPointFile.cpp
     ${SRCS})
 
+  if(WIN32)
+    set(Boost_USE_STATIC_LIBS ON)
+    set(Boost_USE_STATIC ON)
+    set(Boost_USE_MULTITHREAD ON)
+  endif(WIN32)  
   find_package(Boost QUIET)  # For dynamic_bitset
   if (Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIR})
     set(HDRS include/DVision/BRIEF.h ${HDRS})
     set(SRCS src/DVision/BRIEF.cpp ${SRCS})
   endif(Boost_FOUND)
